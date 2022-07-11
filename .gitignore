@@ -1,0 +1,8 @@
+/target
+/build
+/data
+/tmp
+
+configs/kubeconfig.yaml
+
+.env
