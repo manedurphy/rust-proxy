@@ -1,0 +1,37 @@
+{
+  "static_files": {
+    "enabled": false,
+    "path": "/home/dane/Documents/rust_proxy/build"
+  },
+
+  "proxy": {
+    "upstream": {
+      "backend": ["server1:8080", "server2:8080"]
+    },
+    "servers": [
+      {
+        "listen": 8001,
+        "forward": {
+          "type": "LoadBalancer",
+          "backend": "backend"
+        }
+      },
+      {
+        "listen": 8002,
+        "forward": {
+          "type": "Locations",
+          "backend": [
+            {
+              "path": "/api",
+              "proxy_pass": "http://server1:8080/hello"
+            },
+            {
+              "path": "/another-path",
+              "proxy_pass": "http://server2:8080/api"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

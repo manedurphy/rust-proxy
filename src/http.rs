@@ -1,6 +1,6 @@
 use bytes::{Bytes, BytesMut};
 use log::{debug, info};
-use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
+use reqwest::header::{HeaderMap, HeaderName};
 use std::collections::HashMap;
 use std::str::FromStr;
 
