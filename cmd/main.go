@@ -14,6 +14,10 @@ func init() {
 }
 
 func main() {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Printf("%+v\n", r)
+		w.WriteHeader(http.StatusOK)
+	})
 	http.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("%+v\n", r)
 		w.WriteHeader(http.StatusOK)
