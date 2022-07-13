@@ -46,9 +46,9 @@ impl HTTPRequest {
         let protocol = "HTTP/1.1".to_string();
         let buffer_str = String::from_utf8(buffer.to_vec()).unwrap();
         let p: Vec<&str> = buffer_str.split(' ').collect();
+        let mut headers = HeaderMap::new();
         if let Some(path_str) = p.get(1) {
             let path = path_str.to_string();
-            let mut headers = HeaderMap::new();
 
             for line in buffer_str.split("\r\n").into_iter().skip(1) {
                 debug!("line: {}", line);
@@ -64,11 +64,11 @@ impl HTTPRequest {
                 }
             }
 
-            self.method = method;
             self.path = path;
-            self.protocol = protocol;
-            self.headers = headers;
-            self.body = body;
         }
+        self.method = method;
+        self.protocol = protocol;
+        self.headers = headers;
+        self.body = body;
     }
 }
